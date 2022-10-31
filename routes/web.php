@@ -61,4 +61,12 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(fun
     Route::get('order/edit/{order}', [\App\Http\Controllers\Admin\OrdersController::class, 'edit'])->name('order.edit');
     Route::put('order/update/{order}', [\App\Http\Controllers\Admin\OrdersController::class, 'update'])->name('order.update');
 
+    Route::get('promocodes', [\App\Http\Controllers\Admin\PromocodeController::class, 'index'])->name('promocodes.index');
+    Route::get('promocodes/create', [\App\Http\Controllers\Admin\PromocodeController::class, 'create'])->name('promocodes.create');
+    Route::post('promocodes/store', [\App\Http\Controllers\Admin\PromocodeController::class, 'store'])->name('promocodes.store');
+    Route::get('promocodes/{promocode}', [\App\Http\Controllers\Admin\PromocodeController::class, 'show'])->name('promocodes.show');
+    Route::delete('promocodes/{promocode}', [\App\Http\Controllers\Admin\PromocodeController::class, 'destroy'])->name('promocodes.destroy');
+    Route::post('promocodes/apply', [\App\Http\Controllers\Admin\PromocodeController::class, 'apply'])->name('promocodes.apply');
+
+
 });

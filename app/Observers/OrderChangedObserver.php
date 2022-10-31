@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Order;
+use App\Notifications\NewOrderAdminNotification;
 use App\Notifications\OrderChanged;
 
 class OrderChangedObserver
@@ -16,5 +17,10 @@ class OrderChangedObserver
 
         }
 
+    }
+
+    public function created(Order $order)
+    {
+        $order->notify(new NewOrderAdminNotification($order));
     }
 }
