@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
@@ -29,14 +30,17 @@ class ProductsController extends Controller
 
     public function store(CreateProductRequest $request)
     {
-        $data = $request->validated();
-        if (!empty($data['thumbnail'])) {
-            $filename = time() . '.' . $data['thumbnail']->getClientOriginalName();
+        DB::transaction(function () use ($request){
+            $data = $request->validated();
+            if (!empty($data['thumbnail'])) {
+                $filename = time() . '.' . $data['thumbnail']->getClientOriginalName();
 
-            $data['thumbnail']->move(public_path('/image/products/origin/'), $filename);
-            $data['thumbnail'] = $filename;
-        }
-        Product::create($data);
+                $data['thumbnail']->move(public_path('/image/products/origin/'), $filename);
+                $data['thumbnail'] = $filename;
+            }
+            Product::create($data);
+
+        });
 
         return redirect()->route('admin.products.index')->with('success', 'Product successfully added');
     }
@@ -49,12 +53,15 @@ class ProductsController extends Controller
 
     public function update(UpdateProductRequest $request, Product $product)
     {
-        $data = $request->validated();
-        $product->update($data);
+        DB::transaction(function () use ($request, $product){
+            $data = $request->validated();
+            $product->update($data);
 
-        return redirect()->route('admin.products.index')
-            ->with('success', "The product {$product->title} was successfully added!");
+            return redirect()->route('admin.products.index')
+                ->with('success', "The product {$product->title} was successfully added!");
+        });
     }
+
 
 
     public function destroy(Product $product)

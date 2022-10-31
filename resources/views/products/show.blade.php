@@ -24,6 +24,10 @@
                     <input type="number" name="product_count" min="1">
                     <button type="submit">Add to cart</button>
                 </form>
+                <form method="post" action="{{route('wishlist.add', $product)}}">
+                    @csrf
+                    <button type="submit">Add to wishlist</button>
+                </form>
             </div>
         </div>
     </div>

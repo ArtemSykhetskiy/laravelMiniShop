@@ -7,6 +7,7 @@ use App\Http\Requests\CreateCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoriesController extends Controller
 {
@@ -26,9 +27,10 @@ class CategoriesController extends Controller
 
     public function store(CreateCategoryRequest $request)
     {
-        $data = $request->validated();
-
-        Category::create($data);
+        DB::transaction(function () use ($request){
+            $data = $request->validated();
+            Category::create($data);
+        });
 
         return redirect()->route('admin.categories.index')->with('success', 'Category successfully added');
     }
@@ -40,8 +42,10 @@ class CategoriesController extends Controller
 
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        $data = $request->validated();
-        $category->update($data);
+        DB::transaction(function () use ($request, $category) {
+            $data = $request->validated();
+            $category->update($data);
+        });
 
         return redirect()->route('admin.categories.index')->with('success', 'Category successfully updated');
     }

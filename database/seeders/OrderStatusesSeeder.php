@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Helpers\Enums\OrdersStatuses;
 use App\Models\OrderStatus;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Helpers\Enums\OrdersStatuses;
 use Illuminate\Database\Seeder;
 
 class OrderStatusesSeeder extends Seeder

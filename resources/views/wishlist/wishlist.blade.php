@@ -16,26 +16,19 @@
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Price</th>
-                        <th scope="col">Quntity</th>
-                        <th scope="col">Total price</th>
-                        <th scope="col">Subtotal</th>
                         <th scope="col">Delete</th>
 
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach(\Gloudemans\Shoppingcart\Facades\Cart::instance('cart')->content() as $row)
+                    @foreach(auth()->user()->wishes as $product)
                         <tr>
-                            <th scope="row">{{$row->name}}</th>
-                            <td>{{$row->price}}</td>
-                            <td>{{$row->qty}}</td>
-                            <td>{{$row->subtotal}}</td>
-                            <td>{{$row->subtotal}}</td>
+                            <th scope="row">{{$product->title}}</th>
+                            <td>{{$product->price}}</td>
                             <td>
-                                <form method="post" action="{{route('cart.remove')}}">
+                                <form method="post" action="{{route('wishlist.remove', $product)}}">
                                     @method('DELETE')
                                     @csrf
-                                    <input type="hidden" value="{{ $row->rowId }}" name="rowId">
                                     <button class="btn btn-danger">Delete</button>
                                 </form>
                             </td>
@@ -46,7 +39,6 @@
                     </tbody>
                 </table>
 
-                <a href="{{route('checkout')}}">Checkout</a>
 
             </div>
         </div>

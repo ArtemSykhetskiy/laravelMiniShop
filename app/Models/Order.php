@@ -6,10 +6,11 @@ use App\Helpers\Enums\OrdersStatuses;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
     protected $fillable = [
         "status_id",
         "user_id",
@@ -21,6 +22,7 @@ class Order extends Model
         "city",
         "address",
         "total",
+        "notes",
         "vendor_order_id",
         "transaction_id"
     ];
