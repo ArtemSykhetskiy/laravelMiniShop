@@ -34,10 +34,10 @@
                             @if(isAdmin(\Illuminate\Support\Facades\Auth::user()))
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('admin.products.index')}}">{{ __('Products') }}</a>
+                                    <a class="nav-link" href="{{route('admin.products.index', app()->getLocale())}}">{{__('menu.Products')}}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('admin.categories.index')}}">{{ __('Categories') }}</a>
+                                    <a class="nav-link" href="{{route('admin.categories.index',app()->getLocale())}}">{{ __('menu.Categories') }}</a>
                                 </li>
 
                             @endif
@@ -78,6 +78,8 @@
                                     </form>
                                 </div>
                             </li>
+                         <li><a href="{{route('locale', 'en')}}">EN</a> </li>
+                         <li><a href="{{route('locale', 'ua')}}">UA</a> </li>
                         @endguest
                     </ul>
                 </div>

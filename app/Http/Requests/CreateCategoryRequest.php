@@ -32,9 +32,16 @@ class CreateCategoryRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' => ['required' , 'string', 'min:3', 'max:50', 'unique:categories'],
-            'description' => ['min:3', 'string', 'nullable']
+        $rules = [
+            'en.name' => 'required',
+            'en.description' => 'required',
         ];
+
+        foreach (config('translatable.locales') as $locale) {
+            $rules[$locale . '.name'] = 'string';
+            $rules[$locale . '.description'] = 'string';
+        }
+
+        return $rules;
     }
 }

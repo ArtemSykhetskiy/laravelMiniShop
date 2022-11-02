@@ -15,15 +15,19 @@
             @endif
             <form method="post" action="{{route('admin.categories.store')}}">
                 @csrf
-                <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" class="form-control" placeholder="Name" name="name" value="{{old('name')}}">
-                </div>
-                <div class="form-group" style="margin-top: 25px">
-                    <label>Description</label>
-                    <textarea class="form-control" rows="3" name="description" >{{old('description')}}</textarea>
-                </div>
-                <button type="submit" style="margin-top: 25px">Create Category</button>
+                @foreach(config('translatable.locales') as $locale)
+
+                        <div class="form-group">
+                            <label>{{__('category.Name')}} {{ strtoupper($locale) }}</label>
+                            <input type="text" class="form-control" placeholder="{{__('category.Name')}}" name="{{ $locale }}[name]" value="{{ old($locale . '.name') }}">
+                        </div>
+                        <div class="form-group" style="margin-top: 25px">
+                            <label>{{__('category.Description')}}</label>
+                            <textarea class="form-control" rows="3" name="{{ $locale }}[description]" > {{ old($locale . '.description') }}</textarea>
+                        </div>
+
+                @endforeach
+                <button type="submit" style="margin-top: 25px">{{__('category.Create_category')}}</button>
             </form>
         </div>
     </div>

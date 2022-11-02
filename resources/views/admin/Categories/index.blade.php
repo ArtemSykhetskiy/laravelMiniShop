@@ -14,9 +14,9 @@
                     <thead class="thead-light">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col">{{__('category.Name')}}</th>
+                        <th scope="col">{{__('category.Description')}}</th>
+                        <th scope="col">{{__('product.Actions')}}</th>
 
                     </tr>
                     </thead>
@@ -27,11 +27,11 @@
                         <td>{{$category->name}}</td>
                         <td>{{$category->description}}</td>
                         <td>
-                           <a href="{{route('admin.categories.edit', $category)}}"><button type="button" class="btn btn-primary">Edit</button></a>
+                           <a href="{{route('admin.categories.edit', $category)}}"><button type="button" class="btn btn-primary">{{__('product.Edit')}}</button></a>
                             <form method="post" action="{{route('admin.categories.destroy', $category)}}">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger">Delete</button>
+                                <button class="btn btn-danger">{{__('product.Delete')}}</button>
                             </form>
                         </td>
 

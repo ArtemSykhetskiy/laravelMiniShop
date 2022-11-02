@@ -14,11 +14,11 @@
                     <thead class="thead-light">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">SKU</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col">{{__('product.Title')}}</th>
+                        <th scope="col">{{__('product.Category')}}</th>
+                        <th scope="col">{{__('product.Price')}}</th>
+                        <th scope="col">{{__('product.SKU')}}</th>
+                        <th scope="col">{{__('product.Actions')}}</th>
 
                     </tr>
                     </thead>
@@ -26,16 +26,16 @@
                     @foreach($products as $product)
                     <tr>
                         <th scope="row">{{$product->id}}</th>
-                        <td>{{$product->title}}</td>
+                        <td>{{$product->{'title_' .app()->getLocale()} }}</td>
                         <td>{{$product->category->name}}</td>
                         <td>{{$product->price}}</td>
                         <td>{{$product->SKU}}</td>
                         <td>
-                           <a href="{{route('admin.products.edit', $product)}}"><button type="button" class="btn btn-primary">Edit</button></a>
+                           <a href="{{route('admin.products.edit', $product)}}"><button type="button" class="btn btn-primary">{{__('product.Edit')}}</button></a>
                             <form method="post" action="{{route('admin.products.destroy', $product)}}">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger">Delete</button>
+                                <button class="btn btn-danger">{{__('product.Delete')}}</button>
                             </form>
                         </td>
 
