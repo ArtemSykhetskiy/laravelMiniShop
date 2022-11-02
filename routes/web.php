@@ -72,6 +72,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
         Route::post('promocodes/apply', [\App\Http\Controllers\Admin\PromocodeController::class, 'apply'])->name('promocodes.apply');
 
 
+        Route::get('tokens', [\App\Http\Controllers\Api\v1\TokenController::class, 'index'])->name('tokens');
+        Route::post('tokens/create', [\App\Http\Controllers\Api\v1\TokenController::class, 'create'])->name('tokens.create');
+
     });
 });
 

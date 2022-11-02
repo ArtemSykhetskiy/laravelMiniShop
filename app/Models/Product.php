@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model implements TranslatableContract
 {
-    use HasFactory, Translatable, Relationship;
+    use HasFactory, Translatable;
 
     public $translatedAttributes = ['title', 'description', 'short_description'];
     protected $fillable = ['price', 'in_stock', 'SKU', 'discount', 'thumbnail'];
