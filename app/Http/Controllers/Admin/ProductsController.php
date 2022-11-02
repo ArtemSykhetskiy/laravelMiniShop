@@ -62,8 +62,6 @@ class ProductsController extends Controller
         });
     }
 
-
-
     public function destroy(Product $product)
     {
         unlink(public_path('/image/products/origin/'.$product->thumbnail));

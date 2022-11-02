@@ -15,12 +15,22 @@
             @endif
             <form method="post" action="{{route('admin.products.store')}}" enctype="multipart/form-data">
                 @csrf
-                <div class="form-group">
-                    <label>Title</label>
-                    <input type="text" class="form-control" placeholder="Name" name="title" value="{{old('title')}}">
-                </div>
+                @foreach(config('translatable.locales') as $locale)
+                    <div class="form-group">
+                        <label>{{__('product.Title')}}{{ strtoupper($locale) }}</label>
+                        <input type="text" class="form-control" placeholder="{{__('product.Select_category')}}" name="{{ $locale }}[title]" value="{{old('title')}}">
+                    </div>
+                    <div class="form-group" style="margin-top: 25px">
+                        <label>{{__('product.Description')}}{{ strtoupper($locale) }}</label>
+                        <textarea class="form-control" rows="3" name="{{ $locale }}[description]" >{{old('description')}}</textarea>
+                    </div>
+                    <div class="form-group" style="margin-top: 25px">
+                        <label>{{__('product.Short_description')}}{{ strtoupper($locale) }}</label>
+                        <textarea class="form-control" rows="3" name="{{ $locale }}[short_description]" >{{old('short_description')}}</textarea>
+                    </div>
+                @endforeach
                 <div class="form-group" style="margin-top: 25px">
-                    <label for="exampleFormControlSelect1">Select category</label>
+                    <label for="exampleFormControlSelect1">{{__('product.Select_category')}}</label>
                     <select class="form-control" id="exampleFormControlSelect1" name="category_id">
                         @foreach($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>
@@ -28,35 +38,28 @@
                     </select>
                 </div>
                 <div class="form-group" style="margin-top: 25px">
-                    <label>Price</label>
-                    <input type="text" class="form-control" placeholder="Price" name="price" value="{{old('price')}}">
+                    <label>{{__('product.Price')}}</label>
+                    <input type="text" class="form-control" placeholder="{{__('product.Price')}}" name="price" value="{{old('price')}}">
                 </div>
                 <div class="form-group" style="margin-top: 25px">
-                    <label>In stock</label>
-                    <input type="text" class="form-control" placeholder="In stock" name="in_stock" value="{{old('in_stock')}}">
+                    <label>{{__('product.In_stock')}}</label>
+                    <input type="text" class="form-control" placeholder="{{__('product.In_stock')}}" name="in_stock" value="{{old('in_stock')}}">
                 </div>
                 <div class="form-group" style="margin-top: 25px">
-                    <label>Discount in %</label>
-                    <input type="text" class="form-control" placeholder="Discount" name="discount" value="{{old('discount')}}">
+                    <label>{{__('product.Discount_in_%')}}</label>
+                    <input type="text" class="form-control" placeholder="{{__('product.Discount_in_%')}}" name="discount" value="{{old('discount')}}">
                 </div>
                 <div class="form-group" style="margin-top: 25px">
-                    <label>SKU</label>
-                    <input type="text" class="form-control" placeholder="SKU" name="SKU" value="{{old('SKU')}}">
+                    <label>{{__('product.SKU')}}</label>
+                    <input type="text" class="form-control" placeholder="{{__('product.SKU')}}" name="SKU" value="{{old('SKU')}}">
                 </div>
 
+
                 <div class="form-group" style="margin-top: 25px">
-                    <label>Description</label>
-                    <textarea class="form-control" rows="3" name="description" >{{old('description')}}</textarea>
-                </div>
-                <div class="form-group" style="margin-top: 25px">
-                    <label>Short Description</label>
-                    <textarea class="form-control" rows="3" name="short_description" >{{old('short_description')}}</textarea>
-                </div>
-                <div class="form-group" style="margin-top: 25px">
-                    <label for="exampleFormControlFile1">Thumbnail</label>
+                    <label for="exampleFormControlFile1">{{__('product.Thumbnail')}}</label>
                     <input type="file" class="form-control-file" id="exampleFormControlFile1" name="thumbnail">
                 </div>
-                <button type="submit" style="margin-top: 25px">Create Product</button>
+                <button type="submit" style="margin-top: 25px">{{__('product.Create_product')}}</button>
             </form>
         </div>
     </div>

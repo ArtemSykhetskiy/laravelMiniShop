@@ -2,24 +2,19 @@
 
 namespace App\Models;
 
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Astrotomic\Translatable\Traits\Relationship;
+use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Product extends Model implements TranslatableContract
 {
-    use HasFactory;
-    protected $fillable = [
-        'category_id',
-        'title',
-        'description',
-        'short_description',
-        'price',
-        'discount',
-        'thumbnail',
-        'in_stock',
-        'SKU'
-    ];
+    use HasFactory, Translatable, Relationship;
+
+    public $translatedAttributes = ['title', 'description', 'short_description'];
+    protected $fillable = ['price', 'in_stock', 'SKU', 'discount', 'thumbnail'];
 
     public function category()
     {

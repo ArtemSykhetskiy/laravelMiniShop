@@ -9,7 +9,11 @@ class CategoriesController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::withTranslation()
+            ->translatedIn(app()->getLocale())
+            ->latest()
+            ->take(10)
+            ->get();
 
         return view('categories/index', compact('categories'));
     }

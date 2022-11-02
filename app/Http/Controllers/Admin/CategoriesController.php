@@ -29,6 +29,7 @@ class CategoriesController extends Controller
     {
         DB::transaction(function () use ($request){
             $data = $request->validated();
+
             Category::create($data);
         });
 
