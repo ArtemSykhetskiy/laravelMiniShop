@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect(app()->getLocale());
-});
 
-Route::prefix('app')->middleware(['set_locale'])->group(function (){
+Route::group(['prefix' => LaravelLocalization::setLocale()], function()
+{
     Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
     Route::get('locale/{locale}', [\App\Http\Controllers\HomeController::class, 'changeLocale'])->name('locale');
 

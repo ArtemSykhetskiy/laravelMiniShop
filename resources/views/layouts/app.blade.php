@@ -33,12 +33,14 @@
                         @auth
                             @if(isAdmin(\Illuminate\Support\Facades\Auth::user()))
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{route('admin.products.index', app()->getLocale())}}">{{__('menu.Products')}}</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{route('admin.categories.index',app()->getLocale())}}">{{ __('menu.Categories') }}</a>
-                                </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('admin.products.index', app()->getLocale())}}">{{__('menu.Products')}}</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('admin.categories.index',app()->getLocale())}}">{{ __('menu.Categories') }}</a>
+                                    </li>
+
 
                             @endif
                         @endauth
@@ -78,8 +80,10 @@
                                     </form>
                                 </div>
                             </li>
-                         <li><a href="{{route('locale', 'en')}}">EN</a> </li>
-                         <li><a href="{{route('locale', 'ua')}}">UA</a> </li>
+                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                 <li><a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">   {{ $properties['native'] }}</a> </li>
+
+                            @endforeach
                         @endguest
                     </ul>
                 </div>

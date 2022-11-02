@@ -36,10 +36,7 @@ class CreateProductRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'title' => ['required', 'string' ,'min:3', 'max:255', 'unique:products'],
-            'description' => ['required', 'string', 'min:20'],
-            'short_description' => ['required', 'string', 'min:20', 'max:150'],
+        $rules = [
             'SKU' => ['required', 'string', 'min:2', 'max:35', 'unique:products'],
             'price' => ['required', 'numeric'],
             'discount' => ['required', 'numeric', 'min:0', 'max:99'],
@@ -47,7 +44,13 @@ class CreateProductRequest extends FormRequest
             'category_id' => ['required', 'numeric'],
             'thumbnail' => ['required', 'image:png,jpg,jpeg'],
             'image.*' => ['image:png,jpg,jpeg']
-
         ];
+
+        foreach (config('translatable.locales') as $locale) {
+            $rules[$locale . '.title'] = 'string';
+            $rules[$locale . '.description'] = 'string';
+            $rules[$locale . '.short_description'] = 'string';
+        }
+        return $rules;
     }
 }
