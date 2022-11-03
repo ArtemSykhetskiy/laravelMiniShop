@@ -45,6 +45,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
     Route::post('wishlist/{product}/add', [\App\Http\Controllers\WishlistController::class, 'add'])->name('wishlist.add')->middleware('auth');
     Route::delete('wishlist/{product}/delete', [\App\Http\Controllers\WishlistController::class, 'delete'])->name('wishlist.remove')->middleware('auth');
 
+    Route::get('auth/facebook', [\App\Http\Controllers\SocialController::class, 'facebookRedirect'])->name('fb.redirect');
+    Route::get('auth/facebook/callback', [\App\Http\Controllers\SocialController::class, 'loginWithFacebook'])->name('login.redirect');
 
     Route::middleware('auth')->group(function (){
         Route::get('profile', [\App\Http\Controllers\User\UserController::class, 'index'])->name('profile');
