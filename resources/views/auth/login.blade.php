@@ -50,6 +50,13 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row mb-12">
+                            <div class="col-md-6 offset-md-4">
+                                <div class="form-check">
+                                    <a href="{{route('fb.redirect')}}">Login with Facebook</a>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
