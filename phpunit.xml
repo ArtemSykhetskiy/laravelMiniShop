@@ -27,5 +27,7 @@
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
+        <env name="DEFAULT_LOCALE" value="en"/>
+        <env name="LOCALIZATION_HIDE_DEFAULT_LOCALE" value="true"/>
     </php>
 </phpunit>

@@ -16,10 +16,21 @@
             <form method="post" action="{{route('admin.products.update', $product)}}">
                 @method('PUT')
                 @csrf
-                <div class="form-group">
-                    <label>{{__('product.Title')}}</label>
-                    <input type="text" class="form-control" placeholder="{{__('product.Title')}}" name="title" value="{{$product->title}}">
-                </div>
+                @foreach(config('translatable.locales') as $locale)
+                    <div class="form-group">
+                        <label>{{__('product.Title')}}{{ strtoupper($locale) }}</label>
+                        <input type="text" class="form-control" placeholder="{{__('product.Select_category')}}" name="{{ $locale }}[title]" value="{{old('title')}}">
+                    </div>
+                    <div class="form-group" style="margin-top: 25px">
+                        <label>{{__('product.Description')}}{{ strtoupper($locale) }}</label>
+                        <textarea class="form-control" rows="3" name="{{ $locale }}[description]" >{{old('description')}}</textarea>
+                    </div>
+                    <div class="form-group" style="margin-top: 25px">
+                        <label>{{__('product.Short_description')}}{{ strtoupper($locale) }}</label>
+                        <textarea class="form-control" rows="3" name="{{ $locale }}[short_description]" >{{old('short_description')}}</textarea>
+                    </div>
+                @endforeach
+
                 <div class="form-group" style="margin-top: 25px">
                     <label for="exampleFormControlSelect1">{{__('product.Select_category')}}</label>
                     <select class="form-control" id="exampleFormControlSelect1" name="category_id">
@@ -47,14 +58,7 @@
                     <input type="text" class="form-control" placeholder="{{__('product.SKU')}}" name="SKU" value="{{$product->SKU}}">
                 </div>
 
-                <div class="form-group" style="margin-top: 25px">
-                    <label>{{__('product.Description')}}</label>
-                    <textarea class="form-control" rows="3" name="description" >{{$product->description}}</textarea>
-                </div>
-                <div class="form-group" style="margin-top: 25px">
-                    <label>{{__('product.Short_description')}}</label>
-                    <textarea class="form-control" rows="3" name="short_description" >{{$product->short_description}}</textarea>
-                </div>
+
                 <button type="submit" style="margin-top: 25px">{{__('product.Submit')}}</button>
             </form>
         </div>

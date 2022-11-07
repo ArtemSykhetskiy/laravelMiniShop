@@ -13,6 +13,7 @@
                     </ul>
                 </div>
             @endif
+
             <form method="post" action="{{route('admin.products.store')}}" enctype="multipart/form-data">
                 @csrf
                 @foreach(config('translatable.locales') as $locale)
